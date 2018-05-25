@@ -22,14 +22,15 @@ def index():
     """
     logger.info('The session is: %r' % session)
     checklists = db(db.checklist.is_public == True).select(db.checklist.ALL)
+    classes =  db( ).select(db.classes.ALL)
     if auth.user is not None:
         checklists = db((db.checklist.user_email == auth.user.email) | (db.checklist.is_public == True)).select(db.checklist.ALL)
-
-    return dict(checklists=checklists)
+        classes =  db( ).select(db.classes.ALL)
+    return dict(checklists=checklists, classes = classes)
 
 
 def no_swearing(form):
-    form.vars 
+    form.vars
     #if 'fool' in form.vars
     #    form.errors.memo = T('No swearing please')
 
