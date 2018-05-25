@@ -3,10 +3,10 @@
 
 {{block head}}
         <script src="{{=URL('static', 'js/vue.js')}}"></script>
-        
+
         <link href="stupid.css" rel="stylesheet"/>
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
-		
+
 {{end}}
 
 <div class="main_content">
@@ -18,7 +18,7 @@
 
   <!-- Here goes your main HTML code. -->
   <div class = "container">
-     
+
     <div class = "half"></div><div class = "half"></div>
     <div class="quarter">
         <p>Classes in demand:<p>
@@ -45,7 +45,7 @@
     <div>testing 1 2 3</div>
     {{pass }}
     <div></div>
-    
+
 		  <span>Selected: ${ selected }</span>
 
 
@@ -64,10 +64,10 @@
     I can help with...
     <select>
       <option v-for="c in class_list">${c.title}</option>
-      
+
     </select>
     <div class="add_btn">
-        <a class="btn red rounded" href="{{=URL('default', 'add')}}"><i class="fa fa-plus"></i> Go</a>
+        <a class="btn red rounded" href="{{=URL('default', 'add2')}}"><i class="fa fa-plus"></i> Go</a>
       </div>
 
     </div></div></div>
@@ -76,7 +76,7 @@
 
 
   </div>
-	 
+
   <div class = "container">
     <div class = "half"></div><div class = "half"></div>
     <div class="quarter"><div class="padded "></div></div>

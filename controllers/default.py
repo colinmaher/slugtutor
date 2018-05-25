@@ -16,21 +16,22 @@ def index():
 
     if you need a simple wiki simply replace the two lines below with:
     return auth.wiki()
-	
-	
+
+
 	https://piazza.com/class/jf2geiytvic7ao?cid=192
     """
     logger.info('The session is: %r' % session)
     checklists = db(db.checklist.is_public == True).select(db.checklist.ALL)
     if auth.user is not None:
         checklists = db((db.checklist.user_email == auth.user.email) | (db.checklist.is_public == True)).select(db.checklist.ALL)
-		
+
     return dict(checklists=checklists)
 
 
 def no_swearing(form):
-    if 'fool' in form.vars.memo:
-        form.errors.memo = T('No swearing please')
+    form.vars 
+    #if 'fool' in form.vars
+    #    form.errors.memo = T('No swearing please')
 
 def add():
     """Adds a checklist."""
@@ -42,6 +43,15 @@ def add():
         session.flash = T('Please correct the info')
     return dict(form=form)
 
+
+def add2():
+    """Adds a checklist."""
+    form = SQLFORM(db.classes)
+    if form.process(onvalidation=no_swearing).accepted:
+        session.flash = T("Checklist added.")
+        redirect(URL('default','index'))
+
+    return dict(form=form)
 
 @auth.requires_login()
 @auth.requires_signature()
@@ -135,5 +145,3 @@ def call():
     supports xml, json, xmlrpc, jsonrpc, amfrpc, rss, csv
     """
     return service()
-
-
