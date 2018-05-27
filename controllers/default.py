@@ -103,6 +103,16 @@ def edit():
             session.flash = T('Please enter correct values.')
     return dict(form=form)
 
+def profile():
+    """Adds a checklist."""
+    form = SQLFORM(db.student)
+    if form.process(onvalidation=no_swearing).accepted:
+        session.flash = T("Checklist added.")
+        redirect(URL('default','index'))
+    elif form.errors:
+        session.flash = T('Please correct the info')
+    return dict(form=form)
+
 def user():
     """
     exposes:
