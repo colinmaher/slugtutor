@@ -1,5 +1,7 @@
 // This is the js for the default/index.html view.
 
+
+
 var app = function () {
 
 
@@ -45,7 +47,7 @@ var app = function () {
     });
 
 
-    Vue.component('my-checkbox', {
+    const mycheckbox = Vue.component('my-checkbox', {
         template: '#checkbox-template',
         data() {
             return {
@@ -94,11 +96,37 @@ var app = function () {
         // });
     }
 
+    // Testing routing for app
+
+    const Foo = { template: '<div>foo</div>' }
+    const Bar = { template: '<div>bar</div>' }
+    const Results = {template:  ''}
+// 2. Define some routes
+// Each route should map to a component. The "component" can
+// either be an actual component constructor created via
+// `Vue.extend()`, or just a component options object.
+// We'll talk about nested routes later.
+    const routes = [
+      { path: '/foo', component: Foo},
+      { path: '/bar', component: Bar },
+      { path: '/results', component: Results},
+        { path: '/edit', redirect: 'profile.html'}
+    ]
+
+// 3. Create the router instance and pass the `routes` option
+// You can pass in additional options here, but let's
+// keep it simple for now.
+    const router = new VueRouter({
+     routes // short for `routes: routes`
+    })
+
+
     // Complete as needed.
     self.vue = new Vue({
         el: "#vue-div",
         delimiters: ['${', '}'],
         unsafeDelimiters: ['!{', '}'],
+        router,
         data: {
             class_list: class_list,
             student_search: "",

@@ -7,7 +7,7 @@
 # )
 
 def getProfile():
-    profile = d
+    # profile = d
 
 
 
@@ -20,3 +20,6 @@ def getProfile():
         elif form.errors:
             response.flash = 'form has errors'
         return dict(form=form)
+
+def search_tutors():
+    # query available tutors corresponding to the class picked.
