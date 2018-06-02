@@ -42,6 +42,7 @@ var app = function () {
 		//     self.vue.in_demand = data.memos;
 
 		// });
+		
 		self.vue.in_demand = self.vue.class_list;
 
 	}
@@ -58,6 +59,26 @@ var app = function () {
 	}
 
 	self.create_session = function () {
+		  // The submit button to add a track has been added.
+		  $.post(add_session_url,
+            {
+				/*
+				edit_classname:"",
+			edit_phonenumber: "",
+			edit_email:"",*/
+            	classname: self.vue.edit_classname,
+				phonenumber: self.vue.edit_phonenumber,
+				email: self.vue.edit_email,
+            },
+            function (data) {
+               
+                self.vue.checklist.unshift(data.session);
+                self.vue.is_adding_checklist = false;
+                self.edit_classname = '';
+				self.edit_phonenumber = '';
+				self.edit_edit_email = '';
+                self.get_checklist();
+            });
 		console.log("create session");
 	}
 
@@ -160,11 +181,16 @@ var app = function () {
 			student_search: "",
 			tutor_search: "",
 			in_demand: [],
+			session:[], // list of sessions. currently being worked on by anthony
 			quoteText: "",
 			quoteAuthor: "",
 			main_page: true,
 			tutor_result_page: false,
 			day1: d,
+			edit_classname:"",
+			edit_phonenumber: "",
+			edit_email:"",
+
 		},
 		methods: {
 			getQuote: self.getQuote,

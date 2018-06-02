@@ -76,5 +76,13 @@ db.define_table('tutor',
                 primarykey=['name', 'email', 'major']
 	            )
 
+
+
+db.define_table('session',
+               	Field('classname'),
+                Field('phonenumber'),
+				Field('email'),
+                
+	            )
 # after defining tables, uncomment below to enable auditing
 # auth.enable_record_versioning(db)
