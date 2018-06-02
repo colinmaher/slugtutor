@@ -8,19 +8,26 @@
 
   <div id="vue-div" class="display:none">
 
-    <div v-if="!main_page" >
+	 <p>
+         <router-link to="/">Go to Foo</router-link>
+		 <router-link to="/bar">Go to Bar</router-link>
+         <router-link to="/edit">Go to edit</router-link>
+
+     </p>
+      <!-- Router outlet !-->
+      <router-view></router-view>
+
+
+	<div v-if="tutor_result_page">
         <tutor-card></tutor-card>
         <tutor-card></tutor-card>
-    </div>
-
-	 <p> <router-link to="/foo">Go to Foo</router-link>
-		 <router-link to="/bar">Go to Bar</router-link>  </p><router-view></router-view>
-
-    <!-- Here goes your main HTML code. --> 
-	<div v-if="tutor_result_page"> 
 		show tutor result page now
 		<button @click="go_home"> go home </button>
 	</div>
+      <div v-if="profile_page">
+          <view-profile></view-profile>
+          <button @click="go_home"> go home </button>
+      </div>
 	  
     <div v-if="main_page" class="container-fluid">
       <div class="jumbotron">
@@ -38,6 +45,9 @@
           <h1 class="display-4">Welcome back {{=auth.user["first_name"]}}</h1>
           <hr class="my-4">
         {{pass}}
+
+          <button type="button" class="btn btn-outline-success w-20 my-sm-0" v-on:click="get_edit_profile">
+              Edit Profile</button>
 
         <div class="row">
 

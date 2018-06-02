@@ -100,6 +100,94 @@ var app = function () {
 	  </div>`
 	})
 
+	// View profile here
+    Vue.component('view-profile', {
+        props: ['student'],
+        template: `
+            <div class="container">
+                <h1>Edit Profile</h1>
+                <hr>
+                <div class="row">
+                    <!-- left column -->
+                    <div class="col-md-3">
+                        <div class="text-center">
+                            <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
+                            <h6>Upload a different photo...</h6>
+
+                            <input type="file" class="form-control">
+                        </div>
+                    </div>
+
+                    <!-- edit form column -->
+                    <div class="col-md-9 personal-info">
+                        <h3>Personal info</h3>
+
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">First name:</label>
+                                <div class="col-lg-8">
+                                    <input class="form-control" type="text" value="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">Last name:</label>
+                                <div class="col-lg-8">
+                                    <input class="form-control" type="text" value="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">Email:</label>
+                                <div class="col-lg-8">
+                                    <input class="form-control" type="text" value="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">Academic Year</label>
+                                <div class="col-lg-8">
+                                    <div class="ui-select">
+                                        <select id="user_time_zone" class="form-control">
+                                            <option value="Freshman" selected="selected">Freshman</option>
+                                            <option value="Sophomore">Sophomore</option>
+                                            <option value="Junior">Junior</option>
+                                            <option value="Senior">Senior</option>
+                                            <option value="Graduate Student">2021</option>
+                                            <option value="PhD Candidate" >(GMT-06:00) Central Time (US &amp; Canada)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Username:</label>
+                                <div class="col-md-8">
+                                    <input class="form-control" type="text" value="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Password:</label>
+                                <div class="col-md-8">
+                                    <input class="form-control" type="password" value="11111122333">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Confirm password:</label>
+                                <div class="col-md-8">
+                                    <input class="form-control" type="password" value="11111122333">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label"></label>
+                                <div class="col-md-8">
+                                    <input type="button" class="btn btn-primary" value="Save Changes">
+                                    <span></span>
+                                    <input type="reset" class="btn btn-default" value="Cancel">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>`
+    })
+
 
 	const Foo = {
 		template: `<div>foo</div>`
@@ -110,6 +198,8 @@ var app = function () {
 	const Tutor = {
 		template: '<div>tutor</div>'
 	}
+
+
 
 	// 2. Define some routes
 	// Each route should map to a component. The "component" can
@@ -129,7 +219,6 @@ var app = function () {
 			path: '/tutor/:id',
 			component: Tutor
 		}
-
 	]
 
 	// 3. Create the router instance and pass the `routes` option
@@ -142,12 +231,19 @@ var app = function () {
 			// 	path: '/tutor/:id',
 			// 	component: Tutor
 			// }
-	  ]
+
 	})
 
 	self.go_home = function () {
 		self.vue.tutor_result_page = false;
+		self.vue.profile_page = false;
 		self.vue.main_page = true;
+	}
+
+	self.get_edit_profile = function(){
+		self.vue.tutor_result_page = false;
+		self.vue.main_page = false;
+		self.vue.profile_page = true;
 	}
 
 	//datetime
@@ -155,6 +251,7 @@ var app = function () {
 	d = d.toDateString();
 	d = d.slice(4)
 	d = d.slice(0, -4);
+
 
 	// Complete as needed.
 	self.vue = new Vue({
@@ -170,13 +267,15 @@ var app = function () {
 			quoteAuthor: "",
 			main_page: true,
 			tutor_result_page: false,
+			profile_page: false,
 			day1: d,
 		},
 		methods: {
 			getQuote: self.getQuote,
 			search_for_tutors: self.search_for_tutors,
 			create_session: self.create_session,
-			go_home: self.go_home
+			go_home: self.go_home,
+			get_edit_profile: self.get_edit_profile
 			//on student class search submit -> match_tutors()
 			//on tutor class search -> match_students()
 		},
