@@ -8,9 +8,11 @@
 
   <div id="vue-div" class="display:none">
 
-	  
-	  <tutor-card></tutor-card>
-	  <tutor-card></tutor-card>
+    <div v-if="!main_page" >
+        <tutor-card></tutor-card>
+        <tutor-card></tutor-card>
+    </div>
+
 	 <p> <router-link to="/foo">Go to Foo</router-link>
 		 <router-link to="/bar">Go to Bar</router-link>  </p><router-view></router-view>
 

@@ -124,18 +124,24 @@ var app = function () {
 		{
 			path: '/bar',
 			component: Bar
+		},
+		{
+			path: '/tutor/:id',
+			component: Tutor
 		}
+
 	]
 
 	// 3. Create the router instance and pass the `routes` option
 	// You can pass in additional options here, but let's
 	// keep it simple for now.
 	const router = new VueRouter({
-		routes: [
-			{
-				path: '/tutor/:id',
-				component: Tutor
-			}
+		routes,
+			// : [
+			// {
+			// 	path: '/tutor/:id',
+			// 	component: Tutor
+			// }
 	  ]
 	})
 
@@ -183,7 +189,7 @@ var app = function () {
 		}
 	});
 
-
+	//self.get_user?
 	return self;
 };
 
