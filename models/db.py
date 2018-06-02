@@ -65,6 +65,13 @@ auth = Auth(db, host_names=myconf.get('host.names'))
 service = Service()
 plugins = PluginManager()
 
+# Define extra fields for profile page here #
+auth.settings.extra_fields['auth_user']= [
+  Field('major', 'string'),
+  Field('academic_year', 'integer'),
+  Field('tutor', 'boolean', writable=False)
+    ]
+
 # create all tables needed by auth if not custom tables
 auth.define_tables(username=False, signature=False)
 
