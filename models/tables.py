@@ -16,7 +16,7 @@ def get_user_email():
 
 db.define_table('checklist',
                 Field('user_email', default=get_user_email()),
-               
+
                 Field('memo', 'text'),
                 Field('updated_on', 'datetime', update=datetime.datetime.utcnow()),
                 Field('is_public', 'boolean', default=False)
@@ -47,7 +47,7 @@ db.appointments.can_cancel.readable = False
 
 # Things that should be done about this table
 # Populate it with all classes that are on the registery
-# Create a 'add_class function where someone can add a class to the database' 
+# Create a 'add_class function where someone can add a class to the database'
 db.define_table('classes',
 	            Field('title'),
 	            Field('class_id'),
@@ -80,11 +80,12 @@ db.define_table('tutor',
 db.define_table('post',
 			   Field('classname'),
 			   Field('leader'),
-				Field('day_of', 'date'),
-				Field('start_time', 'time'),
-				Field('end_time', 'time'),
-				
-			   
+			   Field('day_of', 'date'),
+			   Field('start_time', 'time'),
+               Field('end_time', 'time'),
+               Field('class_department'),
+               Field('class_number', 'integer')
+
 			   )
 
 # after defining tables, uncomment below to enable auditing
