@@ -108,3 +108,46 @@ CREATE TABLE "classes"(
     "department" CHAR(512) NOT NULL,
     PRIMARY KEY("title", "class_id", "department")) ;
 success!
+DROP TABLE "classes";
+success!
+timestamp: 2018-06-06T21:52:31.554548
+CREATE TABLE "classes"(
+    "title" CHAR(512) NOT NULL,
+    "class_id" CHAR(512) NOT NULL,
+    "professor" CHAR(512),
+    "department" CHAR(512) NOT NULL,
+    PRIMARY KEY("title", "class_id", "department")) ;
+success!
+DROP TABLE "classes";
+success!
+timestamp: 2018-06-06T21:53:29.655701
+CREATE TABLE "classes"(
+    "title" CHAR(512) NOT NULL,
+    "class_id" CHAR(512) NOT NULL,
+    "professor" CHAR(512),
+    "department" CHAR(512),
+    "department_id" CHAR(512) NOT NULL,
+    PRIMARY KEY("title", "class_id", "department_id")) ;
+success!
+DROP TABLE "classes";
+success!
+timestamp: 2018-06-06T21:56:23.069553
+CREATE TABLE "classes"(
+    "title" CHAR(512) NOT NULL,
+    "class_id" CHAR(512) NOT NULL,
+    "professor" CHAR(512),
+    "department" CHAR(512),
+    "department_id" CHAR(512) NOT NULL,
+    PRIMARY KEY("title", "class_id", "department_id")) ;
+success!
+DROP TABLE "classes";
+success!
+timestamp: 2018-06-06T21:57:15.259564
+CREATE TABLE "classes"(
+    "title" TEXT NOT NULL,
+    "class_id" CHAR(512) NOT NULL,
+    "professor" CHAR(512),
+    "department" CHAR(512) NOT NULL,
+    "department_id" CHAR(512) NOT NULL,
+    PRIMARY KEY("title", "class_id", "department", "department_id")) ;
+success!

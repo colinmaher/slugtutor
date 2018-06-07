@@ -48,12 +48,15 @@ db.appointments.can_cancel.readable = False
 # Populate it with all classes that are on the registery
 # Create a 'add_class function where someone can add a class to the database' 
 db.define_table('classes',
-	            Field('title'),
+	            Field('title', 'text'),
 	            Field('class_id'),
 	            Field('professor'),
 	            Field('department'),
-	            primarykey=['title', 'class_id', 'department'],
+	            Field('department_id'),
+	            primarykey=['title', 'class_id', 'department', 'department_id'],
 	            )
+
+# db.classes.drop()
 
 db.define_table('student',
 	            Field('name'),
