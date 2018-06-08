@@ -46,8 +46,16 @@ def search_tutors():
 	c_number = request.vars.class_number
 
 	for row in db((db.post.class_department==c_dept) and (db.post.class_number==c_number)).select(orderby=db.post.classname):
+		post = dict(
+			classname=row.classname,
+			leader=row.leader,
+			day_of=row.day_of,
+			start_time=row.start_time,
+			end_time=row.end_time
 
-		postings.append(row.classname)
+		)
+		# postings.append(row.classname)
+		postings.append(post)
+	print(post)
 
-	print(postings)
-	return response.json(dict(postings=postings))
+	return response.json(dict(postings=post))

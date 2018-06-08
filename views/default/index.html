@@ -18,7 +18,7 @@
 		<div v-if="page=='tutor_result_page'">
 
 			<li v-for="value in class_list">
-				${ value }
+				${ value } $ { value.leader }
 			</li>
 
 			<li v-for="post in postings">
@@ -53,13 +53,13 @@
 									<h6 class="mx-2">Find me help for...</h6>
 
 
-							<!--		<select v-model="selected">
+									<!-- <select v-model="selected">
 									<option v-for="class in class_dept" v-bind:value="class.value"> ${class.text} </option>
-								</select>!-->
+								</select> !-->
 
 									<!--<input class="w-80" v-model="student_search" v placeholder="CMPS 183">!-->
 
-									<input class="w-80" v-model="selected" v-model="student_search" v placeholder="CMPS 183">
+									<input class="w-80" v-model="selected" v-model="student_search" v placeholder="CMPS">
 									<input class="w-80" v-model="student_search"  v placeholder=" 183">
 
 									<button type="button" class="btn btn-outline-success w-20 my-sm-0" v-on:click="search_for_tutors(selected,student_search)">Search</button>

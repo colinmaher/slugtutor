@@ -72,15 +72,16 @@ var app = function () {
 					class_number: class_num
 				}, function(data){
 					// Here you return back the available postings for that query
-					if(data.success){
-						console.log("return postings now");
+
 						self.vue.postings = data.postings;
-					}
-				})
+					})
 		// self.get_search(search);
 		 } else {
 			self.get_classes;
 		 }
+		 self.goto('tutor_result_page');
+	 		// $.getJSON(get_memos_url(0, 10), function (data) {
+	 		//     self.vue.in_demand = data.memos;
 	 };
 
 
@@ -170,7 +171,7 @@ var app = function () {
 		unsafeDelimiters: ['!{', '}'],
 
 		data: {
-			selected: "CMPS",
+			selected: "",
 			student_search: "",
 			class_dept: [
 				{text: 'AMS', value: 'AMS'},
@@ -186,7 +187,9 @@ var app = function () {
 			class_list: [],
 			page: 'main',
 			tutor_cards: [],
-			picked: ""
+			picked: "",
+			postings: []
+
 
 		},
 		methods: {
