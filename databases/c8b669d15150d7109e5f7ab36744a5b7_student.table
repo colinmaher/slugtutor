@@ -14,13 +14,13 @@ p6
 g1
 sS'notnull'
 p7
-I01
+I00
 sS'length'
 p8
 I512
 sS'sql'
 p9
-S'INTEGER NOT NULL'
+S'INTEGER'
 p10
 sS'unique'
 p11

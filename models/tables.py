@@ -53,7 +53,7 @@ db.define_table('classes',
 	            Field('professor'),
 	            Field('department'),
 	            Field('department_id'),
-	            primarykey=['title', 'class_id', 'department', 'department_id'],
+	            primarykey=['title', 'class_id', 'department_id'],
 	            )
 
 # db.classes.drop()
@@ -63,11 +63,13 @@ db.define_table('student',
 	            Field('email', default=get_user_email()),
 	            Field('major'),
 	            Field('acadmic_year', 'integer'),
-                primarykey=['name', 'email', 'acadmic_year']
+                primarykey=['name', 'email']
 	            )
 
 db.student.email.readable = False
 db.student.email.writable = False
+
+# db.student.drop()
 
 db.define_table('tutor',
                 Field('name'),

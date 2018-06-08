@@ -151,3 +151,66 @@ CREATE TABLE "classes"(
     "department_id" CHAR(512) NOT NULL,
     PRIMARY KEY("title", "class_id", "department", "department_id")) ;
 success!
+DROP TABLE "classes";
+success!
+timestamp: 2018-06-08T11:57:11.019357
+CREATE TABLE "classes"(
+    "title" TEXT NOT NULL,
+    "class_id" CHAR(512) NOT NULL,
+    "professor" CHAR(512),
+    "department" CHAR(512) NOT NULL,
+    "department_id" CHAR(512) NOT NULL,
+    PRIMARY KEY("title", "class_id", "department", "department_id")) ;
+success!
+DROP TABLE "classes";
+success!
+DROP TABLE "checklist";
+success!
+timestamp: 2018-06-08T11:59:55.241545
+CREATE TABLE "checklist"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "user_email" CHAR(512),
+    "memo" TEXT,
+    "updated_on" TIMESTAMP,
+    "is_public" CHAR(1)
+);
+success!
+timestamp: 2018-06-08T11:59:55.250274
+CREATE TABLE "classes"(
+    "title" TEXT NOT NULL,
+    "class_id" CHAR(512) NOT NULL,
+    "professor" CHAR(512),
+    "department" CHAR(512),
+    "department_id" CHAR(512) NOT NULL,
+    PRIMARY KEY("title", "class_id", "department_id")) ;
+success!
+DROP TABLE "student";
+success!
+timestamp: 2018-06-08T12:01:06.526216
+CREATE TABLE "student"(
+    "name" CHAR(512) NOT NULL,
+    "email" CHAR(512) NOT NULL,
+    "major" CHAR(512),
+    "acadmic_year" INTEGER NOT NULL,
+    PRIMARY KEY("name", "email", "acadmic_year")) ;
+success!
+DROP TABLE "student";
+success!
+timestamp: 2018-06-08T12:02:01.129756
+CREATE TABLE "student"(
+    "name" CHAR(512) NOT NULL,
+    "email" CHAR(512) NOT NULL,
+    "major" CHAR(512),
+    "acadmic_year" INTEGER NOT NULL,
+    PRIMARY KEY("name", "email", "acadmic_year")) ;
+success!
+DROP TABLE "student";
+success!
+timestamp: 2018-06-08T12:19:16.875575
+CREATE TABLE "student"(
+    "name" CHAR(512) NOT NULL,
+    "email" CHAR(512) NOT NULL,
+    "major" CHAR(512),
+    "acadmic_year" INTEGER,
+    PRIMARY KEY("name", "email")) ;
+success!
