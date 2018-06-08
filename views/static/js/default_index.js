@@ -58,9 +58,10 @@ var app = function () {
 					class_number: class_num
 				}, function(data){
 					// Here you return back the available postings for that query
-					if(data.success)
+					if(data.success){
 						console.log("return postings now")
 					  self.vue.postings = data.posting
+					}
 				})
 		// self.get_search(search);
 		 } else {

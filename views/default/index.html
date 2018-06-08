@@ -21,6 +21,10 @@
 				${ value }
 			</li>
 
+			<li v-for="post in postings">
+				${ post }
+			</li>
+
 			<button @click="goto('main')"> go home </button>
 		</div>
 		<transition name="fade">
@@ -47,13 +51,18 @@
 								<div class="form-group">
 									<h4 class="mx-2 lead">Search for classes to find tutors who can help you:</h4>
 									<h6 class="mx-2">Find me help for...</h6>
-									<input class="w-80" v-model="student_search" placeholder="CMPS 183">
-										<select v-model="selected">
-										<option v-for="class in class_dept" v-bind:value="class.value"> </option>
-									</select>
-									<span>Selected:</span>
 
-									<button type="button" class="btn btn-outline-success w-20 my-sm-0" v-on:click="search_for_tutors(dept,selected,)">Search</button>
+
+							<!--		<select v-model="selected">
+									<option v-for="class in class_dept" v-bind:value="class.value"> ${class.text} </option>
+								</select>!-->
+
+									<!--<input class="w-80" v-model="student_search" v placeholder="CMPS 183">!-->
+
+									<input class="w-80" v-model="selected" v-model="student_search" v placeholder="CMPS 183">
+									<input class="w-80" v-model="student_search"  v placeholder=" 183">
+
+									<button type="button" class="btn btn-outline-success w-20 my-sm-0" v-on:click="search_for_tutors(selected,student_search)">Search</button>
 								</div>
 							</form>
 							<form>

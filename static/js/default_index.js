@@ -14,7 +14,7 @@ var app = function () {
 		}
 	};
 
-	//This is the random quote generator endpoint 
+	//This is the random quote generator endpoint
 
 	const quote_endpoint = 'https://quotes.rest/qod?category=students';
 
@@ -47,20 +47,41 @@ var app = function () {
 
 	}
 
-	self.search_for_tutors = function (search) {
-		console.log(search);
-		//console.log(self.vue.student_search);
-		if (search != "") {
-			self.get_search(search);
-		} else {
-			self.get_classes;
-		}
-		self.goto('tutor_result_page');
-		// $.getJSON(get_memos_url(0, 10), function (data) {
-		//     self.vue.in_demand = data.memos;
+	// self.search_for_tutors = function (search) {
+	// 	console.log(search);
+	// 	//console.log(self.vue.student_search);
+	// 	if (search != "") {
+	// 		self.get_search(search);
+	// 	} else {
+	// 		self.get_classes;
+	// 	}
+	// 	self.goto('tutor_result_page');
+	// 	// $.getJSON(get_memos_url(0, 10), function (data) {
+	// 	//     self.vue.in_demand = data.memos;
+	//
+	// 	// });
+	// }
+	self.search_for_tutors = function (idx,class_num) {
+		// console.log(search);
+		console.log(class_num);
 
-		// });
-	}
+		if (class_num != "") {
+			$.getJSON(search_tutors_url,
+				{
+					class_department: idx,
+					class_number: class_num
+				}, function(data){
+					// Here you return back the available postings for that query
+					if(data.success){
+						console.log("return postings now");
+						self.vue.postings = data.postings;
+					}
+				})
+		// self.get_search(search);
+		 } else {
+			self.get_classes;
+		 }
+	 };
 
 
 
@@ -74,7 +95,7 @@ var app = function () {
 				console.log("adding_post")
 			}
 		);
-		
+
 		self.goto('create_post_page')
 	}
 
@@ -84,7 +105,7 @@ var app = function () {
 		  <div class="col-sm-5">
 			  <div class="border">
 			  <div class="row">
-				  
+
 				  <div class="col-sm-4">
 					  <img src="https://cdn3.iconfinder.com/data/icons/sympletts-part-3/128/circle-user-2-128.png">
 					  <p>five star rating</p>
@@ -135,9 +156,9 @@ var app = function () {
 //
 //		};
 //		if (page == 'search_results'){
-//			
+//
 //		};...
-		
+
 
 	};
 
@@ -149,7 +170,13 @@ var app = function () {
 		unsafeDelimiters: ['!{', '}'],
 
 		data: {
+			selected: "CMPS",
 			student_search: "",
+			class_dept: [
+				{text: 'AMS', value: 'AMS'},
+				{text: 'CMPS', value: 'CMPS'},
+				{text: 'CMPE', value: 'CMPE'}
+			],
 			tutor_input: "",
 			in_demand: [],
 			quoteText: "",
@@ -160,7 +187,7 @@ var app = function () {
 			page: 'main',
 			tutor_cards: [],
 			picked: ""
-			
+
 		},
 		methods: {
 			getQuote: self.getQuote,

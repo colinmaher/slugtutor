@@ -84,8 +84,8 @@ db.define_table('post',
 			   Field('start_time', 'time'),
                Field('end_time', 'time'),
                Field('class_department'),
-               Field('class_number', 'integer')
-
+               Field('class_number', 'integer'),
+               primarykey=['classname']
 			   )
 
 # after defining tables, uncomment below to enable auditing
