@@ -69,11 +69,12 @@ db.student.email.writable = False
 
 db.define_table('tutor',
                 Field('name'),
-                Field('email'),
+                Field('email',default=get_user_email()),
                 Field('major'),
                 Field('academic_year'),
                 Field('classes'),
                 Field('rating', 'double', default=0.0),
+				Field('ratingform'),
                 primarykey=['name', 'email', 'major']
 	            )
 

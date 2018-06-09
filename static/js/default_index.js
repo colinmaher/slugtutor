@@ -140,6 +140,38 @@ var app = function () {
 			});
 	};
 
+	self.get_tutorlist = function () {
+		$.get(api_get_tutorlist_url,
+			function (data) {
+				self.vue.tutorlist = data.tutorlist
+			});
+	};
+
+	self.submit_rating = function (rating,email_reference) {
+		console.log(rating)
+		console.log(email_reference)
+		$.post(submitrating_url,
+            {
+                ratingcopy: rating,
+                emailcopy: email_reference
+            },
+            function () {
+              for (var i = 0; i < self.vue.tutorlist.length; i++) {
+                  // console.log(self.vue.checklist[i].id);
+                  if (self.vue.tutorlist.email === email_reference) {
+                      idx = i;
+                      self.vue.checklist[idx].rating = rating;
+                      //self.save(cl_)
+                      break;
+                  }
+              }
+              self.get_tutorlist();
+
+            }
+         )
+		   
+	};
+
 	self.get_search = function (search) {
 		$.get(api_get_search_url, {
 				search: search
@@ -188,7 +220,9 @@ var app = function () {
 			page: 'main',
 			tutor_cards: [],
 			picked: "",
-			postings: []
+			postings: [],
+			tutorlist: [],
+			form_tutorscore: null,
 
 
 		},
@@ -199,7 +233,8 @@ var app = function () {
 			go_home: self.go_home,
 			get_classes: self.get_classes,
 			get_search: self.get_search,
-			goto: self.goto
+			goto: self.goto,
+			submit_rating: self.submit_rating
 			//on student class search submit -> match_tutors()
 			//on tutor class search -> match_students()
 		},
@@ -212,7 +247,7 @@ var app = function () {
 		}
 	});
 
-
+	self.get_tutorlist();
 	self.get_classes();
 
 	return self;

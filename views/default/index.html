@@ -4,7 +4,12 @@
 	var api_get_classes_url = "{{=URL('api', 'get_classes')}}";
 	var api_get_search_url = "{{=URL('api', 'get_search')}}";
 	var api_add_post_url = "{{=URL('api', 'add_post')}}";
+	var api_get_tutorlist_url = "{{=URL('api', 'get_tutorlist')}}";
+	var save_recent_post = "{{=URL('api', 'save_recent_post')}}";
+	
 
+	var submitrating_url = "{{=URL('api', 'submitrating')}}";
+	var message = ' ' ; 
 </script>
 {{end}}
 
@@ -21,6 +26,8 @@
 				${ value } $ { value.leader }
 			</li>
 
+			
+
 			<li v-for="post in postings">
 				${ post }
 			</li>
@@ -35,7 +42,21 @@
 
 					{{if auth.user is None:}}
 					<h1 class="display-4">Learn More. Earn More.</h1>
-
+					
+				
+				<ul>
+					
+				<li v-for="t in tutorlist">
+					aa
+					${t.email}
+					${t.rating}
+					<div>
+							<input class="form-control string" id="no_table_artist" v-model="t.ratingform" placeholder="Title" type="text" />
+							<span class="help-block"></span>
+							<button  v-on:click="submit_rating(t.ratingform,t.email)">Submit Rating</button>
+						  </div>
+				</li>
+			</ul>
 
 					<hr class="my-4">
 					<p class="lead">Slugtutor is the easiest way for students to find the best tutors for their academic needs.</p>
@@ -109,6 +130,7 @@
 					<label for="inputStartTime">Time</label>
 					<input type="text" class="form-control" id="inputStarTime">
 				</div>
+				
 				<div class="form-row">
 					<div class="form-group col-md-6">
 						<label for="inputGroupOrInd"></label>

@@ -1,4 +1,4 @@
-timestamp: 2018-05-29T19:06:42.533953
+timestamp: 2018-06-09T12:57:40.397841
 CREATE TABLE "web2py_session_slugtutor183"(
     "id" INTEGER PRIMARY KEY AUTOINCREMENT,
     "locked" CHAR(1),
@@ -9,7 +9,7 @@ CREATE TABLE "web2py_session_slugtutor183"(
     "session_data" BLOB
 );
 success!
-timestamp: 2018-05-29T19:06:42.588402
+timestamp: 2018-06-09T12:57:40.405252
 CREATE TABLE "auth_user"(
     "id" INTEGER PRIMARY KEY AUTOINCREMENT,
     "first_name" CHAR(128),
@@ -18,24 +18,27 @@ CREATE TABLE "auth_user"(
     "password" CHAR(512),
     "registration_key" CHAR(512),
     "reset_password_key" CHAR(512),
-    "registration_id" CHAR(512)
+    "registration_id" CHAR(512),
+    "major" CHAR(512),
+    "academic_year" INTEGER,
+    "tutor" CHAR(1)
 );
 success!
-timestamp: 2018-05-29T19:06:42.602138
+timestamp: 2018-06-09T12:57:40.409800
 CREATE TABLE "auth_group"(
     "id" INTEGER PRIMARY KEY AUTOINCREMENT,
     "role" CHAR(512),
     "description" TEXT
 );
 success!
-timestamp: 2018-05-29T19:06:42.615047
+timestamp: 2018-06-09T12:57:40.414752
 CREATE TABLE "auth_membership"(
     "id" INTEGER PRIMARY KEY AUTOINCREMENT,
     "user_id" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE  ,
     "group_id" INTEGER REFERENCES "auth_group" ("id") ON DELETE CASCADE  
 );
 success!
-timestamp: 2018-05-29T19:06:42.627462
+timestamp: 2018-06-09T12:57:40.419685
 CREATE TABLE "auth_permission"(
     "id" INTEGER PRIMARY KEY AUTOINCREMENT,
     "group_id" INTEGER REFERENCES "auth_group" ("id") ON DELETE CASCADE  ,
@@ -44,7 +47,7 @@ CREATE TABLE "auth_permission"(
     "record_id" INTEGER
 );
 success!
-timestamp: 2018-05-29T19:06:42.640051
+timestamp: 2018-06-09T12:57:40.425839
 CREATE TABLE "auth_event"(
     "id" INTEGER PRIMARY KEY AUTOINCREMENT,
     "time_stamp" TIMESTAMP,
@@ -54,7 +57,7 @@ CREATE TABLE "auth_event"(
     "description" TEXT
 );
 success!
-timestamp: 2018-05-29T19:06:42.653819
+timestamp: 2018-06-09T12:57:40.432022
 CREATE TABLE "auth_cas"(
     "id" INTEGER PRIMARY KEY AUTOINCREMENT,
     "user_id" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE  ,
@@ -64,7 +67,7 @@ CREATE TABLE "auth_cas"(
     "renew" CHAR(1)
 );
 success!
-timestamp: 2018-05-29T19:06:42.668243
+timestamp: 2018-06-09T12:57:40.437076
 CREATE TABLE "checklist"(
     "id" INTEGER PRIMARY KEY AUTOINCREMENT,
     "user_email" CHAR(512),
@@ -73,8 +76,9 @@ CREATE TABLE "checklist"(
     "is_public" CHAR(1)
 );
 success!
-timestamp: 2018-05-29T19:06:42.677187
+timestamp: 2018-06-09T12:57:40.442425
 CREATE TABLE "appointments"(
+    "classname" CHAR(512),
     "appointment" TIMESTAMP NOT NULL,
     "tutor" CHAR(512) NOT NULL,
     "can_cancel" CHAR(1),
@@ -82,7 +86,15 @@ CREATE TABLE "appointments"(
     "rate" DOUBLE,
     PRIMARY KEY("appointment", "tutor")) ;
 success!
-timestamp: 2018-05-29T19:06:42.692181
+timestamp: 2018-06-09T12:57:40.451292
+CREATE TABLE "classes"(
+    "title" CHAR(512) NOT NULL,
+    "class_id" CHAR(512) NOT NULL,
+    "professor" CHAR(512),
+    "department" CHAR(512) NOT NULL,
+    PRIMARY KEY("title", "class_id", "department")) ;
+success!
+timestamp: 2018-06-09T12:57:40.457441
 CREATE TABLE "student"(
     "name" CHAR(512) NOT NULL,
     "email" CHAR(512) NOT NULL,
@@ -90,7 +102,7 @@ CREATE TABLE "student"(
     "acadmic_year" INTEGER NOT NULL,
     PRIMARY KEY("name", "email", "acadmic_year")) ;
 success!
-timestamp: 2018-05-29T19:06:42.701269
+timestamp: 2018-06-09T12:57:40.464811
 CREATE TABLE "tutor"(
     "name" CHAR(512) NOT NULL,
     "email" CHAR(512) NOT NULL,
@@ -98,13 +110,17 @@ CREATE TABLE "tutor"(
     "academic_year" CHAR(512),
     "classes" CHAR(512),
     "rating" DOUBLE,
+    "ratingform" CHAR(512),
     PRIMARY KEY("name", "email", "major")) ;
 success!
-timestamp: 2018-05-29T19:13:17.332047
-CREATE TABLE "classes"(
-    "title" CHAR(512) NOT NULL,
-    "class_id" CHAR(512) NOT NULL,
-    "professor" CHAR(512),
-    "department" CHAR(512) NOT NULL,
-    PRIMARY KEY("title", "class_id", "department")) ;
+timestamp: 2018-06-09T12:57:40.471885
+CREATE TABLE "post"(
+    "classname" CHAR(512) NOT NULL,
+    "leader" CHAR(512),
+    "day_of" DATE,
+    "start_time" TIME,
+    "end_time" TIME,
+    "class_department" CHAR(512),
+    "class_number" INTEGER,
+    PRIMARY KEY("classname")) ;
 success!

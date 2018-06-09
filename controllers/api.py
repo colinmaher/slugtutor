@@ -15,7 +15,22 @@ def get_classes():
 		classes.append(row.title)
 	return response.json(dict(classes=classes))
 
-
+def save_recent_post():
+	print('klean kanteen')
+	
+	tutorlist = []
+	for row in db(db.tutor).select(db.tutor.ALL):
+		
+		t = dict(
+            email = row.email,
+			ratingform = ' ',
+			rating = 32,
+                
+         )
+		tutorlist.append(t)
+		
+	return  response.json(dict(tutorlist=tutorlist))
+	
 def get_search():
 	results = []
 	search = request.vars.search
@@ -38,6 +53,28 @@ def add_post():
     return dict(form=form)
 
 
+def get_tutorlist():
+	print('black and yellow')
+  	tutorlist = []
+	for row in db(db.tutor).select(db.tutor.ALL):
+		#print(row)
+		#tutorlist.append(row.email)
+		t = dict(
+                email = row.email,
+				ratingform = ' ',
+				rating = row.rating,
+                
+            )
+		tutorlist.append(t)
+	return response.json(dict(tutorlist=tutorlist))
+
+def submitrating():
+	print(request.vars.ratingcopy)
+	print(request.vars.emailcopy)
+	print('hydroflask')
+	print('fuck')
+	db(db.tutorlist.email == request.vars.emailcopy).update_record(rating = request.vars.ratingcopy)
+	return 'h'
 def search_tutors():
  	postings = []
 	# search = request.vars.search
