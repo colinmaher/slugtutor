@@ -214,3 +214,14 @@ CREATE TABLE "student"(
     "acadmic_year" INTEGER,
     PRIMARY KEY("name", "email")) ;
 success!
+DROP TABLE "checklist";
+success!
+timestamp: 2018-06-08T12:57:43.341121
+CREATE TABLE "checklist"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "user_email" CHAR(512),
+    "memo" TEXT,
+    "updated_on" TIMESTAMP,
+    "is_public" CHAR(1)
+);
+success!

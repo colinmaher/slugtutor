@@ -29,6 +29,7 @@ db.checklist.is_public.readable = False
 db.checklist.updated_on.writable = db.checklist.updated_on.readable = False
 db.checklist.id.writable = db.checklist.id.readable = False
 
+# db.checklist.drop()
 
 db.define_table('appointments',
 	           Field('appointment', 'datetime'),

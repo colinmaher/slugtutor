@@ -18,7 +18,6 @@ def get_classes():
 def get_search():
 	results = []
 	search = request.vars.search
-	print(search)
 	for row in db(db.classes.class_id==search).select(orderby=db.classes.title):
 
 		results.append(row.title)

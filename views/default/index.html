@@ -3,16 +3,13 @@
 	var search_tutors_url = "{{=URL('api', 'search_tutors')}}";
 	var api_get_classes_url = "{{=URL('api', 'get_classes')}}";
 	var api_get_search_url = "{{=URL('api', 'get_search')}}";
-
-
 </script>
+
 {{end}}
 
 <div class="main_content">
 
 	<div id="vue-div" class="display:none">
-
-
 
 		<!-- Here goes your main HTML code. -->
 		<div v-if="tutor_result_page">
@@ -44,6 +41,17 @@
 
 						<div class="offset-md-3 col-md-6 col-sm-12">
 							<form>
+								<div class="form-group">
+									<h4 class="mx-2 lead"> Most Recent Classes Searched</h4>
+									  <!-- <form id="search">
+									    Search <input name="query" v-model="searchQuery">
+									  </form> -->
+									  <demo-grid
+									    :data="gridData"
+									    :columns="gridColumns"
+									    :filter-key="searchQuery">
+									  </demo-grid>
+								</div>
 								<div class="form-group">
 									<h4 class="mx-2 lead">Search for classes to find tutors who can help you:</h4>
 									<input class="w-80" v-model="student_search" placeholder="CMPS 183">
@@ -86,4 +94,5 @@
 
 
 <script src="{{=URL('static', 'js/default_index.js')}}"></script>
+<!-- <link rel="stylesheet" type="text/css" href=".css"> -->
 
