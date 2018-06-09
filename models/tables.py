@@ -20,7 +20,7 @@ def get_user_name():
 
 db.define_table('checklist',
                 Field('user_email', default=get_user_email()),
-               
+
                 Field('memo', 'text'),
                 Field('updated_on', 'datetime', update=datetime.datetime.utcnow()),
                 Field('is_public', 'boolean', default=False)
@@ -51,7 +51,7 @@ db.appointments.can_cancel.readable = False
 
 # Things that should be done about this table
 # Populate it with all classes that are on the registery
-# Create a 'add_class function where someone can add a class to the database' 
+# Create a 'add_class function where someone can add a class to the database'
 db.define_table('classes',
 	            Field('title'),
 	            Field('class_id'),
@@ -83,23 +83,24 @@ db.define_table('tutor',
 	            )
 
 
-
+def get_user_email():
+    return auth.user.email if auth.user else None
 
 db.define_table('post',
+                Field('classname'),
 				Field('department'),
+                Field('classnum', 'integer'),
 				Field('created_on', 'datetime', default=request.now),
-				Field('classnum', 'integer'),
-				Field('classname'),
+                Field('created_by', 'reference auth_user',  default=auth.user_id),
 				Field('day_of', 'date'),
 				Field('start_time', 'time'),
 				Field('end_time', 'time'),
-				Field('created_by', 'reference auth_user',  default=auth.user_id),
 				Field('students_joined', 'reference auth_user'),
 				Field('leader_email')
 			   )
 
 #db.post.department.requires = IS_IN_DB(db, 'classes.department', "%(department)s", zero=T('choose one'))
-				
+
 db.post.created_by.writable = False
 
 

@@ -14,7 +14,7 @@ var app = function () {
 		}
 	};
 
-	//This is the random quote generator endpoint 
+	//This is the random quote generator endpoint
 
 	const quote_endpoint = 'https://quotes.rest/qod?category=students';
 
@@ -61,8 +61,12 @@ var app = function () {
 					  <p>{{post.classname}}</p>
 				  </div>
 				  <div class="col-sm-8">
-				  <p>{{post.created_by}}</p>
-					<p>{{post.leader_email}}</p>
+					<p>Contact Info</p>
+				  <p>Name: {{post.first_name}}</p>
+					<p>Email: {{post.leader_email}}</p>
+					<p>Date: {{post.day_of}}</p>
+					<p>Start time: {{post.start_time}}</p>
+					<p>End time: {{post.end_time}}</p>
 					  <p>(123)456-7890</p>
 				  </div>
 			  </div>
@@ -73,9 +77,9 @@ var app = function () {
 
 
 	self.update_posting = function () {
-		
+
 		console.log("update posting");
-		
+
 	}
 
 	self.goto = function (page) {
@@ -83,18 +87,25 @@ var app = function () {
 		self.vue.page = page;
 	}
 
-	self.search_for_tutors = function (search) {
-		console.log(search);
-		//console.log(self.vue.student_search);
-		if (search != "") {
-			self.get_search(search);
-			self.goto('tutor_result_page');
-		}
-		// $.getJSON(get_memos_url(0, 10), function (data) {
-		//     self.vue.in_demand = data.memos;
+	self.search_for_tutors = function (dept, class_num) {
+		console.log(class_num);
 
-		// });
-	}
+	  if (class_num != "") {
+	    $.getJSON(search_tutors_url,
+	      {
+	        class_department: dept,
+	        class_number: class_num
+	      }, function(data){
+	        // Here you return back the available postings for that query
+
+	          self.vue.post_array = data.posts;
+	        })
+	  // self.get_search(search);
+	   } else {
+	    self.get_classes;
+	   }
+		 self.goto('tutor_result_page');
+	 };
 
 	self.get_search = function (search) {
 		$.get(api_get_search_url, {
@@ -110,7 +121,7 @@ var app = function () {
 	};
 
 	self.goto = function (page) {
-		
+
 		self.vue.page = page;
 
 	};
@@ -125,8 +136,8 @@ var app = function () {
 			});
 
 	};
-	
-	
+
+
 
 	// Complete as needed.
 	self.vue = new Vue({
@@ -137,6 +148,8 @@ var app = function () {
 		data: {
 			current_user: "",
 			student_search: "",
+			class_dept: "",
+			class_num: "",
 			in_demand: [],
 			quoteText: "",
 			quoteAuthor: "",
