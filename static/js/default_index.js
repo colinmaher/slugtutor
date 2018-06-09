@@ -119,6 +119,7 @@ var app = function () {
 				  <div class="col-sm-4">
 					  <p>{{post.classname}}</p>
 				  </div>
+				  
 				  <div class="col-sm-8">
 				  <p>{{post.created_by}}</p>
 					<p>email@ucsc.edu</p>
@@ -154,14 +155,8 @@ var app = function () {
 		//console.log(self.vue.student_search);
 		if (search != "") {
 			self.get_search(search);
-		} else {
-			self.get_classes;
+			self.goto('tutor_result_page');
 		}
-		self.goto('tutor_result_page');
-		// $.getJSON(get_memos_url(0, 10), function (data) {
-		//     self.vue.in_demand = data.memos;
-
-		// });
 	}
 	
 	self.get_search = function (search) {
@@ -179,6 +174,10 @@ var app = function () {
 
 	self.goto = function (page) {
 		self.vue.page = page;
+		
+		if (page == 'tutor_dashboard'){
+			self.get_initial_user_info();	
+		};
 		//		if (page == 'main') {
 		//
 		//		};
@@ -224,7 +223,8 @@ var app = function () {
 			class_list: [],
 			page: 'main',
 			picked: "",
-			post_array: []
+			post_array: [],
+			username_array: []
 
 		},
 		methods: {
@@ -249,8 +249,6 @@ var app = function () {
 		}
 	});
 
-
-	self.get_classes();
 
 	self.get_initial_user_info();
 

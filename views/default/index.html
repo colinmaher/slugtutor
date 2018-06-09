@@ -5,6 +5,7 @@
 	var api_get_search_url = "{{=URL('api', 'get_search')}}";
 	var api_add_post_url = "{{=URL('api', 'add_post')}}";
 	var api_get_initial_user_info_url = "{{=URL('api', 'get_initial_user_info', user_signature=True)}}";
+	var api_get_usernames_url = "{{=URL('api', 'get_usernames', user_signature=True)}}";
 
 </script>
 {{end}}
@@ -16,6 +17,7 @@
 
 
 		<!-- Here goes your main HTML code. -->
+
 		<div v-if="page=='tutor_result_page'">
 
 			<post-card v-for="post in post_array" v-bind:post="post"></post-card>
@@ -106,16 +108,14 @@
 			</div>
 		</transition>
 
-		<transition name="fade">
-			<div id="tutor_dash" v-if="page=='tutor_dashboard'">
-				<div class="jumbotron">
+		<div id="tutor_dash" v-if="page=='tutor_dashboard'">
+			<div class="jumbotron">
+				<h3>Your Postings</h3>
+				<post-card v-for="post in post_array" v-bind:post="post"></post-card>
+				<button @click="goto('main')"> go home </button>
 
-					<button @click="goto('main')"> go home </button>
-					<post-card v-for="post in post_array" v-bind:post="post"></post-card>
-
-				</div>
 			</div>
-		</transition>
+		</div>
 
 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"></script>

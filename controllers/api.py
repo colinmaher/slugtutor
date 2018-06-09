@@ -17,6 +17,13 @@ def get_initial_user_info():
 		
 	return response.json(dict(posts=posts))
 
+def get_usernames():
+	usernames = []
+	for row in db(db.auth_user).select(db.auth_user.ALL):
+		#print(row)
+		usernames.append(row.first_name)
+	return response.json(dict(usernames=usernames))
+
 def get_classes():
 	posts = []
 	for row in db(db.post).select(db.post.classnum==request.vars.search):
