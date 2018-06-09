@@ -96,8 +96,9 @@ db.define_table('post',
 				Field('start_time', 'time'),
 				Field('end_time', 'time'),
 				Field('students_joined', 'reference auth_user'),
-				Field('leader_email')
-			   )
+				Field('leader_email'),
+                #lazy_tables=True
+                )
 
 #db.post.department.requires = IS_IN_DB(db, 'classes.department', "%(department)s", zero=T('choose one'))
 

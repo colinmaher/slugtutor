@@ -1,5 +1,6 @@
 // This is the js for the default/index.html view.
 
+
 var app = function () {
 
 
@@ -47,9 +48,6 @@ var app = function () {
 		self.vue.in_demand = self.vue.class_list;
 
 	}
-
-
-
 
 	Vue.component('post-card', {
 		props: ['post'],
@@ -138,7 +136,6 @@ var app = function () {
 	};
 
 
-
 	// Complete as needed.
 	self.vue = new Vue({
 		el: "#vue-div",
@@ -159,7 +156,6 @@ var app = function () {
 			page: 'main',
 			picked: "",
 			post_array: []
-
 		},
 		methods: {
 			getQuote: self.getQuote,
@@ -169,7 +165,7 @@ var app = function () {
 			get_search: self.get_search,
 			goto: self.goto,
 			get_initial_user_info: self.get_initial_user_info,
-			update_posting: self.update_posting
+			update_posting: self.update_posting,
 			//on student class search submit -> match_tutors()
 			//on tutor class search -> match_students()
 		},

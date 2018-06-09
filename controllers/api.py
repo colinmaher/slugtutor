@@ -28,9 +28,10 @@ def get_classes():
 def search_posts():
 	posts = []
 	c_dept = request.vars.class_department
-	c_num = request.vars.class_num
-	for row in db((db.post.classnum==c_num) and (db.post.department==c_dept)).select(orderby=db.post.created_by):
-		print(row)
+	c_num = request.vars.class_number
+
+	for row in db((db.post.classnum==c_num) & (db.post.department==c_dept)).select(orderby=db.post.created_by):
+		
 		post = dict(
 			created_on=row.created_on,
 			classname=row.classname,
