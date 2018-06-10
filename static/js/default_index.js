@@ -171,6 +171,7 @@ var app = function () {
 	self.get_classes = function () {
 		$.get(api_get_classes_url,
 			function (data) {
+				if (data.results == null) return;
 				self.vue.class_list = data.classes
 			});
 	};
@@ -180,6 +181,7 @@ var app = function () {
 				search: search
 			},
 			function (data) {
+				if (data.results == null) return;
 				self.vue.class_list = data.results
 			}
 
@@ -191,8 +193,7 @@ var app = function () {
 				search: search 
 		    },
 			function (data) {
-				console.log(self.vue.in_demand);
-				console.log(data.results[0]);
+				if (data.results == null) return;
 				if (self.contains(self.vue.in_demand, data.results[0])) return;
 				if (self.vue.in_demand.length < 5) {
 					self.vue.in_demand.push(data.results[0]);
