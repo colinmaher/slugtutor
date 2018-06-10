@@ -14,6 +14,15 @@ var app = function () {
 		}
 	};
 
+	// Obtained and Modified from: http://adripofjavascript.com/blog/drips/object-equality-in-javascript.html
+	self.contains = function(a, b) {
+		b_Object = JSON.stringify(b);
+		for (var i = 0; i <a.length; i++) {
+			if (JSON.stringify(a[i]) == b_Object) return true;
+			return false;
+		}	
+	};	
+
 	//This is the random quote generator endpoint 
 
 	const quote_endpoint = 'https://quotes.rest/qod?category=students';
@@ -170,6 +179,7 @@ var app = function () {
 	self.go_home = function () {
 		self.vue.tutor_result_page = false;
 		self.vue.main_page = true;
+		self.vue.get_gridData();
 	}
 
 	self.get_classes = function () {
@@ -191,28 +201,33 @@ var app = function () {
 	};
 
 	self.append_in_demand = function (search) {
-		// $get(api_get_search_url,) {
-		// 	search: search
-		// },
-		// function (data) {
-		// 	title = data.results[title]
-		// }
-		if (self.vue.in_demand.includes(search)) return
-	    if (self.vue.in_demand.length < 5) {
-			self.vue.in_demand.push(search);
-			// self.vue.in_demand.enumerate()
-		} else {
-			self.vue.in_demand.shift();
-			self.vue.in_demand.push(search);
-		}
+		$.get(api_get_search_url, {
+				search: search 
+		    },
+			function (data) {
+				console.log(self.vue.in_demand);
+				console.log(data.results[0]);
+				if (self.contains(self.vue.in_demand, data.results[0])) return;
+				if (self.vue.in_demand.length < 5) {
+					self.vue.in_demand.push(data.results[0]);
+				} else {
+					self.vue.in_demand.shift();
+					self.vue.in_demand.push(data.results[0]);
+				}
+			}
+		);
 	};
 
-    // self.get_gridData = function() {
-
-    // }
+    self.get_gridData = function() {
+       for (var i = 0; i<self.vue.in_demand.length; i++) {
+       	   if (self.vue.gridData.includes(self.vue.in_demand[i])) continue;
+           else self.vue.gridData[i] = self.vue.in_demand[i];
+       }
+    }
 
     // self.get_gridColumns = function() {
-    // 	$.get
+    // 	console.log("WE MADE IT HERE")
+    // 	console.log(self.vue.in_demand);
     // }
 
 
@@ -232,13 +247,8 @@ var app = function () {
 			tutor_result_page: false,
 			class_list: [],
 			searchQuery: '',
-		    gridColumns: ['name', 'power'],
-		    gridData: [
-		      { name: 'Chuck Norris', power: Infinity },
-		      { name: 'Bruce Lee', power: 9000 },
-		      { name: 'Jackie Chan', power: 7000 },
-		      { name: 'Jet Li', power: 8000 }
-		    ]
+		    gridColumns: [ 'department', 'class_id', 'title'],
+		    gridData: []
 			},
 		methods: {
 			getQuote: self.getQuote,
@@ -248,7 +258,7 @@ var app = function () {
 			get_classes: self.get_classes,
 			get_search: self.get_search,
 			get_gridData: self.get_gridData,
-			get_gridColumns: self.get_gridColumns
+			// get_gridColumns: self.get_gridColumns
 			//on student class search submit -> match_tutors()
 			//on tutor class search -> match_students()
 		},

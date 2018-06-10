@@ -17,10 +17,13 @@ def get_classes():
 
 def get_search():
 	results = []
-	search = request.vars.search
-	for row in db(db.classes.class_id==search).select(orderby=db.classes.title):
-
-		results.append(row.title)
+	row_info = {}
+	search = request.vars.search.split()
+	print("Here are Searches: 1: %r, 2: %r", search[0], search[1])
+	query = (db.classes.class_id==search[1]) & (db.classes.department_id==search[0])
+	for row in db(query).select():
+		row_info = {'title' : row.title, 'department' : row.department, 'class_id' : row.class_id}
+		results.append(row_info)
 		
 	print(results)
 	return response.json(dict(results=results))
