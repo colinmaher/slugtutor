@@ -5,6 +5,7 @@
 	var api_get_search_url = "{{=URL('api', 'get_search')}}";
 	var api_add_post_url = "{{=URL('api', 'add_post')}}";
 	var api_get_initial_user_info_url = "{{=URL('api', 'get_initial_user_info', user_signature=True)}}";
+	var api_vote_url = "{{=URL('api', 'vote')}}"
 
 </script>
 {{end}}
@@ -18,7 +19,17 @@
 		<!-- Here goes your main HTML code. -->
 		<div v-if="page=='tutor_result_page'">
 
-			<post-card v-for="post in post_array" v-bind:post="post"></post-card>
+			<post-card v-for="post in post_array" v-bind:post="post">
+			<!--	<span v-on:mouseout="mouse_out(post._idx)">
+									<span v-on:mouseover="mouse_over(post._idx, idx)"
+												v-on:click="set_stars(post._idx, idx)"
+												v-for="idx in star_indices">
+											 <i v-if="idx <= post.num_stars_display" class="fa fa-star"></i>
+											 <i v-if="idx > post.num_stars_display" class="fa fa-star-o"></i>
+									</span>
+									<i v-if="img._pending" class="fa fa-spinner fa-spin"></i>
+							</span> !-->
+			</post-card>
 
 			<button @click="goto('main')"> go home </button>
 		</div>

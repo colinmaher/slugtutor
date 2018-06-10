@@ -49,31 +49,112 @@ var app = function () {
 
 	}
 
+	// Vue.component('post-card', {
+	// 	props: ['post'],
+	// 	data: function() {
+	// 		return{
+	//
+	// 			star_indices: [1, 2, 3, 4, 5]
+	// 		}
+	// 	},
+	// 	methods: {
+	// 		test: function() {
+	// 			console.log('hi');
+	// 		}
+	// 	},
+	// 	template: `<div id="post-card" style="color:blue;padding:20px" class="container-fluid">
+	// 	  <div class="col-sm-5">
+	// 		  <div class="border">
+	// 		  <div class="row">
+	// 			  <div class="col-sm-4">
+	// 				  <p>{{post.classname}}</p>
+	// 			  </div>
+	// 			  <div class="col-sm-8">
+	// 				<p>Contact Info</p>
+	// 			  <p>Name: {{post.first_name}}</p>
+	// 				<p> Rating:
+	//
+	// 					<i v-on:click="this.test()" class="fa fa-star"></i>
+	// 					<i v-on:click="this.test(2)" class="fa fa-star"></i>
+	// 					<i v-on:click="this.test(3)" class="fa fa-star"></i>
+	// 					<i v-on:click="this.test(4)" class="fa fa-star"></i>
+	// 					<i v-on:click="this.test(5)" class="fa fa-star"></i>
+	// 					</p>
+	// 				Email: {{post.leader_email}}</p>
+	// 				<p>Date: {{post.day_of}}</p>
+	// 				<p>Start time: {{post.start_time}}</p>
+	// 				<p>End time: {{post.end_time}}</p>
+	// 				  <p>(123)456-7890</p>
+	// 			  </div>
+	// 		  </div>
+	// 		</div>
+	// 	  </div>
+	//   </div>`
+	// })
 	Vue.component('post-card', {
-		props: ['post'],
-		template: `<div id="post-card" style="color:blue;padding:20px" class="container-fluid">
-		  <div class="col-sm-5">
-			  <div class="border">
-			  <div class="row">
-				  <div class="col-sm-4">
-					  <p>{{post.classname}}</p>
-				  </div>
-				  <div class="col-sm-8">
-					<p>Contact Info</p>
-				  <p>Name: {{post.first_name}}</p>
-					<p>Email: {{post.leader_email}}</p>
-					<p>Date: {{post.day_of}}</p>
-					<p>Start time: {{post.start_time}}</p>
-					<p>End time: {{post.end_time}}</p>
-					  <p>(123)456-7890</p>
-				  </div>
-			  </div>
-			</div>
-		  </div>
-	  </div>`
+		props: {
+			post: Object,
+		},
+		data: function () {
+			return {
+				classname: this.post.classname,
+				dept: this.post.department,
+				type: ''
+			}
+		},
+		events: {
+
+		},
+		methods: {
+			join: function () {
+				//console.log(this.post.id);
+				console.log(self.vue.user_list[0].email + ' wants to join')
+
+			},
+			start1: function () {
+				 // console.log(1);
+				 self.vue.set_stars(get_email,1);
+			},
+			start2: function () {
+				self.vue.set_stars(get_email,2);
+			},
+			start3: function () {
+				self.vue.set_stars(get_email,3);
+			},
+			start4: function () {
+				self.vue.set_stars(get_email,4);
+			},
+			start5: function () {
+				self.vue.set_stars(get_email,5);
+			},
+			get_email: function() {
+				return this.post.leader_email;
+			},
+		},
+		template: `<div class="card" style="width: 18rem;">
+		<img v-if="this.post.department=='CMPS'" class="card-img-top" src="https://comps.canstockphoto.com/happy-computer-drawing_csp1651204.jpg" alt="Card image cap">
+		<img v-if="this.post.department=='CMPE'" class="card-img-top" src="http://www.clipartquery.com/images/39/gallery-for-computer-engineering-clipart-IARWQW.jpg" alt="Card image cap">
+		<img v-if="this.post.department=='EE'" class="card-img-top" src="http://fscomps.fotosearch.com/compc/CSP/CSP500/dangerous-work-with-electricity-clipart__k40115174.jpg" alt="Card image cap">
+
+		<div class="card-body">
+			<h5 class="card-title">{{post.classname}}</h5>
+			<h6>{{post.department}}{{post.classnum}}</h6>
+			<p class="card-text">Tutor: {{post.leader_name}}<br>Email: {{post.leader_email}}<br>{{post.num_students_joined}}/5 students joined</p>
+			<a v-on:click="this.join" class="btn btn-primary">Join</a>
+
+			<i class="fa fa-star" v-on:click="this.start1"></i>
+			<i class="fa fa-star" v-on:click="this.start2"></i>
+			<i class="fa fa-star" v-on:click="this.start3"></i>
+			<i class="fa fa-star" v-on:click="this.start4"></i>
+			<i class="fa fa-star" v-on:click="this.start5"></i>
+
+		</div>
+		</div>`
 	})
 
-
+self.test = function(num) {
+	console.log(num);
+}
 	self.update_posting = function () {
 
 		console.log("update posting");
@@ -118,11 +199,6 @@ var app = function () {
 		);
 	};
 
-	self.goto = function (page) {
-
-		self.vue.page = page;
-
-	};
 
 	self.get_initial_user_info = function () {
 		//console.log("get initial user info");
@@ -133,6 +209,31 @@ var app = function () {
 				console.log(self.vue.current_user)
 			});
 
+	};
+	//rating stuff going Here
+	self.mouse_over = function (img_idx, star_idx) {
+		self.vue.post_array[img_idx].num_stars_display = star_idx;
+	};
+
+	self.mouse_out = function(img_idx) {
+		self.vue.post_array[img_idx].num_stars_display = self.vue.post_array[img_idx].num_stars;
+	};
+
+	self.set_stars = function (tutor,star_idx) {
+
+		// img._pending = true;
+		// self.vue.$set(self.vue.image_list, img_idx, img);
+		$.post(api_vote_url,
+			{
+				t_email: tutor,
+				t_rating: star_idx
+			},
+			function () {
+				// img = self.vue.image_list[img_idx];
+				// img._pending = false;
+				// self.vue.$set(self.vue.image_list, img_idx, img);
+			}
+		)
 	};
 
 
@@ -155,7 +256,9 @@ var app = function () {
 			class_list: [],
 			page: 'main',
 			picked: "",
-			post_array: []
+			post_array: [],
+			// Rating stuff going here
+
 		},
 		methods: {
 			getQuote: self.getQuote,
@@ -168,6 +271,9 @@ var app = function () {
 			update_posting: self.update_posting,
 			//on student class search submit -> match_tutors()
 			//on tutor class search -> match_students()
+			mouse_over: self.mouse_over,
+      mouse_out: self.mouse_out,
+      set_stars: self.set_stars
 		},
 		created: function () {
 

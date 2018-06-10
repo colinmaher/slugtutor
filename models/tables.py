@@ -86,6 +86,8 @@ db.define_table('tutor',
 def get_user_email():
     return auth.user.email if auth.user else None
 
+# def get_tutor_ratings():
+
 db.define_table('post',
                 Field('classname'),
 				Field('department'),
@@ -93,6 +95,7 @@ db.define_table('post',
 				Field('created_on', 'datetime', default=request.now),
                 Field('created_by', 'reference auth_user',  default=auth.user_id),
 				Field('day_of', 'date'),
+                # Field('ratings', default=)
 				Field('start_time', 'time'),
 				Field('end_time', 'time'),
 				Field('students_joined', 'reference auth_user'),

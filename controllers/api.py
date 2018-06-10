@@ -31,10 +31,11 @@ def search_posts():
 	c_num = request.vars.class_number
 
 	for row in db((db.post.classnum==c_num) & (db.post.department==c_dept)).select(orderby=db.post.created_by):
-		
+
 		post = dict(
 			created_on=row.created_on,
 			classname=row.classname,
+
 			leader_email=row.leader_email,
 			day_of=row.day_of,
 			start_time=row.start_time,
@@ -54,3 +55,35 @@ def add_post():
     elif form.errors:
         session.flash = T('Please correct the info')
     return dict(form=form)
+# ratings going Here
+
+def get_info():
+    def get_num_stars(img_idx):
+        if not auth.user_id:
+            return None
+        r = db((db.rating.user_id == auth.user_id) & (db.rating.image_id == img_idx)).select().first()
+        return 0 if r is None else r.num_stars
+
+    image_list = []
+    for i, img_url in enumerate(IMAGE_URLS):
+        n = get_num_stars(i)
+        image_list.append(dict(
+            url=img_url,
+            num_stars = n,
+            num_stars_display = n, # To facilitate vue
+            id=i,
+        ))
+    return response.json(dict(image_list=image_list))
+
+
+
+def vote():
+	new_rating = request.vars.t_rating
+    t_email = request.vars.t_email
+
+	db.tutor.update_or_insert(
+        (db.tutor.email == t_email),
+        rating = new_rating
+    )
+    time.sleep(0.5) # To make testing easier.
+    return "ok"
