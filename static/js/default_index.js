@@ -14,7 +14,7 @@ var app = function () {
 		}
 	};
 
-	// Obtained and Modified from: http://adripofjavascript.com/blog/drips/object-equality-in-javascript.html
+	// Checks equivalency of objects given an array and an object
 	self.contains = function(a, b) {
 		b_Object = JSON.stringify(b);
 		for (var i = 0; i <a.length; i++) {
@@ -37,27 +37,13 @@ var app = function () {
 		});
 	}
 
-
-	// Vue.component('student_class_search', {
-	//     data: function () {
-	//         return {
-	//             count: 0
-	//         }
-	//     },
-	//     template: '<p>${ title }: ${ demand }</p>'
-	// });
 	self.get_in_demand_classes = function () {
-		// $.getJSON(get_memos_url(0, 10), function (data) {
-		//     self.vue.in_demand = data.memos;
-
-		// });
 		self.vue.in_demand = self.vue.class_list;
 
 	}
 
 	self.search_for_tutors = function (search) {
 		console.log(search);
-		//console.log(self.vue.student_search);
 		if (search != "") {
 			self.get_search(search);
 		} else {
@@ -225,12 +211,6 @@ var app = function () {
        }
     }
 
-    // self.get_gridColumns = function() {
-    // 	console.log("WE MADE IT HERE")
-    // 	console.log(self.vue.in_demand);
-    // }
-
-
 	// Complete as needed.
 	self.vue = new Vue({
 		el: "#vue-div",
@@ -258,9 +238,6 @@ var app = function () {
 			get_classes: self.get_classes,
 			get_search: self.get_search,
 			get_gridData: self.get_gridData,
-			// get_gridColumns: self.get_gridColumns
-			//on student class search submit -> match_tutors()
-			//on tutor class search -> match_students()
 		},
 		created: function () {
 
@@ -272,20 +249,6 @@ var app = function () {
 	});
 
 	self.get_classes();
-
-	// var demo = new Vue({
-	//   el: '#demo',
-	//   data: {
-	//     searchQuery: '',
-	//     gridColumns: ['name', 'power'],
-	//     gridData: [
-	//       { name: 'Chuck Norris', power: Infinity },
-	//       { name: 'Bruce Lee', power: 9000 },
-	//       { name: 'Jackie Chan', power: 7000 },
-	//       { name: 'Jet Li', power: 8000 }
-	//     ]
-	//   }
-	// });
 
 	return self;
 };
