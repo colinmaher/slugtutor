@@ -41,16 +41,33 @@ var app = function () {
 
 	}
 
+	self.check_joined = function (p_id) {
+
+		var jarray = self.vue.joined_post_array
+
+		for(var i = 0; i < jarray.length; i++){
+
+			if(jarray[i].id == p_id) return true;
+
+		}
+
+		return false;
+
+	}
 
 	Vue.component('post-card', {
 		props: {
 			post: Object,
 		},
+		created: function (){
+			console.log("created post " + this.post.id);
+			console.log("already joined? " + (self.check_joined(this.post.id)));
+		},
 		data: function () {
 			return {
 				dept: this.post.department,
 				self_post: this.post.leader_email == self.vue.current_email,
-				already_joined: self.vue.joined_post_array.indexOf(this.post.id) >= 0
+				already_joined: self.check_joined(this.post.id)
 			}
 		},
 		events: {
@@ -73,6 +90,7 @@ var app = function () {
 				self.vue.curr_post.day_of = this.post.day_of;
 				self.vue.curr_post.start_time = this.post.start_time;
 
+				self.vue.show_join_success = true;
 				self.vue.goto('student_dashboard');
 
 			},
@@ -378,7 +396,8 @@ var app = function () {
 				meeting_location: '',
 				day_of: '',
 				show_this: true
-			}
+			},
+			show_join_success: false
 
 
 		},
