@@ -22,7 +22,7 @@ var app = function () {
 		}
 	};
 
-	//This is the random quote generator endpoint 
+	//This is the random quote generator endpoint
 
 	const quote_endpoint = 'https://quotes.rest/qod?category=students';
 
@@ -82,18 +82,18 @@ var app = function () {
 
 		},
 		template: `<div class="container" style="padding:30px; margin:10px">
-			<div class="row justify-content-md-left ">
-				<div class="col col-lg-2 border-top-0">
-					<h5>CMPS109</h5>
-					<h6>Advanced Programming</h6>
+			<div class="row justify-content-md-right">
+				<div class="col col-lg-3 border-top-0">
+					<h5>{{post.department}} {{post.classnum}}</h5>
+					<h6>{{post.classname}}</h6>
 				</div>
 				<div class="col-md-auto">
 					{{post.leader_name}}, {{post.leader_email}}<br>
 					*****<br>
 					{{post.start_time}}-{{post.end_time}}, {{post.meeting_location}}
-					
+
 				</div>
-				<div class="col col-lg-2 pull-right">
+				<div class="col col-lg-6 pull-right">
 					<br>
  						<a v-if="!this.self_post && !this.already_joined" v-on:click="this.join" class="btn btn-primary pull-right">Join</a>
 						<a v-if="this.already_joined && !this.self_post" class="btn btn-default disabled">Joined</a>
@@ -106,7 +106,7 @@ var app = function () {
 
 
 	Vue.component('demo-grid', {
-		template: ` 
+		template: `
 	    <table>
 	    <thead>
 	      <tr>
